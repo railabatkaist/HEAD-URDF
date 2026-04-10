@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
-     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
-     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot name="head">
+<robot name="head-full">
+  <!-- [URDF-WRITER] Generated on 2026-04-10 22:54:58 -->
+
+  <!-- [URDF-WRITER] from module [_fixed-base] -->
+
   <!-- this link makes the robot fixed-base in RAISIM -->
   <link name="world"></link>
 
-  <link name="base_link">
+  <link name="base"></link>
+
+  <joint name="base_fix" type="fixed">
+    <origin xyz="0 0 0.8" rpy="0 0 0"/>
+    <parent link="world" />
+    <child link="base" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+
+  <!-- [URDF-WRITER] from module [head] -->
+
+  <link name="HEAD_base">
     <!-- edited with custom script -->
     <inertial>
       <origin 
@@ -26,7 +39,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/base_link.STL" />
+        <mesh filename="../meshes/HEAD_base.STL" />
       </geometry>
       <material name="">
         <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
@@ -37,19 +50,19 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/base_link.STL" />
+        <mesh filename="../meshes/HEAD_base.STL" />
       </geometry>
     </collision> -->
   </link>
 
-  <joint name="base_world" type="fixed">
+  <joint name="HEAD_fix" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <parent link="world" />
-    <child link="base_link" />
+    <parent link="base" />
+    <child link="HEAD_base" />
     <axis xyz="0 0 0" />
   </joint>
 
-  <link name="neck">
+  <link name="HEAD_neck">
     <!-- edited with custom script -->
     <inertial>
     <origin
@@ -69,7 +82,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/neck.STL" />
+        <mesh filename="../meshes/HEAD_neck.STL" />
       </geometry>
       <material name="">
         <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
@@ -80,16 +93,16 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/neck.STL" />
+        <mesh filename="../meshes/HEAD_neck.STL" />
       </geometry>
     </collision> -->
   </link>
-  <joint name="pan" type="revolute">
+  <joint name="HEAD1_pan" type="revolute">
     <origin
       xyz="0 0 0"
       rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="neck" />
+    <parent link="HEAD_base" />
+    <child link="HEAD_neck" />
     <axis
       xyz="0 0 -1" />
     <limit
@@ -98,7 +111,7 @@
       effort="1.57"
       velocity="390" />
   </joint>
-  <link name="chin">
+  <link name="HEAD_chin">
     <!-- edited with custom script -->
     <inertial>
     <origin
@@ -118,7 +131,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/chin.STL" />
+        <mesh filename="../meshes/HEAD_chin.STL" />
       </geometry>
       <material name="">
         <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -129,16 +142,16 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/chin.STL" />
+        <mesh filename="../meshes/HEAD_chin.STL" />
       </geometry>
     </collision> -->
   </link>
-  <joint name="tilt" type="revolute">
+  <joint name="HEAD2_tilt" type="revolute">
     <origin
       xyz="0 0.0186 0.12"
       rpy="-1.5708 0 0" />
-    <parent link="neck" />
-    <child link="chin" />
+    <parent link="HEAD_neck" />
+    <child link="HEAD_chin" />
     <axis
       xyz="0 0 -1" />
     <limit
@@ -147,7 +160,10 @@
       effort="1.57"
       velocity="390" />
   </joint>
-  <link name="face">
+
+  <!-- [URDF-WRITER] from module [head-face] -->
+
+  <link name="HEAD_face">
     <!-- edited with custom script -->
     <inertial>
     <origin
@@ -167,7 +183,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/face.STL" />
+        <mesh filename="../meshes/HEAD_face.STL" />
       </geometry>
       <material name="">
         <color rgba="0.250980392156863 0.250980392156863 0.250980392156863 1" />
@@ -178,20 +194,23 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/face.STL" />
+        <mesh filename="../meshes/HEAD_face.STL" />
       </geometry>
     </collision> -->
   </link>
-  <joint name="chin_face" type="fixed">
+  <joint name="HEAD_face_fixed" type="fixed">
     <origin
       xyz="0 0 0"
       rpy="0 0 0" />
-    <parent link="chin" />
-    <child link="face" />
+    <parent link="HEAD_chin" />
+    <child link="HEAD_face" />
     <axis
       xyz="0 0 0" />
   </joint>
-  <link name="d455_link">
+
+  <!-- [URDF-WRITER] from module [head-sensor_d455] -->
+
+  <link name="HEAD_d455">
     <!-- edited with custom script -->
     <inertial>
     <origin
@@ -211,7 +230,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/d455_link.STL" />
+        <mesh filename="../meshes/HEAD_d455.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -222,20 +241,23 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/d455_link.STL" />
+        <mesh filename="../meshes/HEAD_d455.STL" />
       </geometry>
     </collision> -->
   </link>
-  <joint name="chin_d455" type="fixed">
+  <joint name="HEAD_d455_fixed" type="fixed">
     <origin
       xyz="0.042 0 -0.0186"
       rpy="1.5708 0 0" />
-    <parent link="chin" />
-    <child link="d455_link" />
+    <parent link="HEAD_chin" />
+    <child link="HEAD_d455" />
     <axis
       xyz="0 0 0" />
   </joint>
-  <link name="mid360_link">
+
+  <!-- [URDF-WRITER] from module [head-sensor_mid360] -->
+
+  <link name="HEAD_mid360">
     <!-- edited with custom script -->
     <inertial>
     <origin
@@ -255,7 +277,7 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/mid360_link.STL" />
+        <mesh filename="../meshes/HEAD_mid360.STL" />
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -266,17 +288,18 @@
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../meshes/mid360_link.STL" />
+        <mesh filename="../meshes/HEAD_mid360.STL" />
       </geometry>
     </collision> -->
   </link>
-  <joint name="chin_mid360" type="fixed">
+  <joint name="HEAD_mid360_fixed" type="fixed">
     <origin
       xyz="-0.025 -0.042 -0.0186"
       rpy="1.5708 0 0" />
-    <parent link="chin" />
-    <child link="mid360_link" />
+    <parent link="HEAD_chin" />
+    <child link="HEAD_mid360" />
     <axis
       xyz="0 0 0" />
   </joint>
+
 </robot>

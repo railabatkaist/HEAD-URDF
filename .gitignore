@@ -1,0 +1,4 @@
+urdf/**
+scripts/logs/**
+
+!urdf/head-full.urdf

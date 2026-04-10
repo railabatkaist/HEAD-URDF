@@ -1,0 +1,45 @@
+
+  <link name="HEAD_mid360">
+    <!-- edited with custom script -->
+    <inertial>
+    <origin
+        xyz="-0.0002 -1e-05 0.02203"
+        rpy="0 0 0" />
+    <mass value="0.265" />
+    <inertia
+        ixx="0.00012374566"
+        ixy="-1.102e-08"
+        ixz="-1.964e-08"
+        iyy="0.00013334891"
+        iyz="-3.4840000000000006e-08"
+        izz="0.0001322739" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_mid360.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_mid360.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="HEAD_mid360_fixed" type="fixed">
+    <origin
+      xyz="-0.025 -0.042 -0.0186"
+      rpy="1.5708 0 0" />
+    <parent link="HEAD_chin" />
+    <child link="HEAD_mid360" />
+    <axis
+      xyz="0 0 0" />
+  </joint>

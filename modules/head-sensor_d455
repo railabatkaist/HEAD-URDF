@@ -1,0 +1,45 @@
+
+  <link name="HEAD_d455">
+    <!-- edited with custom script -->
+    <inertial>
+    <origin
+        xyz="0.01298 5e-05 -0.00014000000000000001"
+        rpy="0 0 0" />
+    <mass value="0.12" />
+    <inertia
+        ixx="0.00014290851000000002"
+        ixy="3.955e-08"
+        ixz="-1.4216e-07"
+        iyy="1.328332e-05"
+        iyz="6.73e-08"
+        izz="0.00014208451" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_d455.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_d455.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="HEAD_d455_fixed" type="fixed">
+    <origin
+      xyz="0.042 0 -0.0186"
+      rpy="1.5708 0 0" />
+    <parent link="HEAD_chin" />
+    <child link="HEAD_d455" />
+    <axis
+      xyz="0 0 0" />
+  </joint>

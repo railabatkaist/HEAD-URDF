@@ -1,0 +1,142 @@
+
+  <link name="HEAD_base">
+    <!-- edited with custom script -->
+    <inertial>
+      <origin 
+        xyz="-0.00013000000000000002 6e-05 -0.01956"
+        rpy="0 0 0" />
+      <mass value="0.22691" />
+      <inertia
+        ixx="6.726676e-05"
+        ixy="-2.4361e-07"
+        ixz="-6.3156e-07"
+        iyy="6.666816e-05"
+        iyz="6.418000000000001e-08"
+        izz="7.244472e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_base.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_base.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+
+  <joint name="HEAD_fix" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="base" />
+    <child link="HEAD_base" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="HEAD_neck">
+    <!-- edited with custom script -->
+    <inertial>
+    <origin
+        xyz="-0.00621 -0.00059 0.09247"
+        rpy="0 0 0" />
+    <mass value="0.38718" />
+    <inertia
+        ixx="0.00084209162"
+        ixy="1.78477e-06"
+        ixz="-3.73364e-06"
+        iyy="0.00090124031"
+        iyz="6.43932e-06"
+        izz="0.00015094396" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_neck.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_neck.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="HEAD1_pan" type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent link="HEAD_base" />
+    <child link="HEAD_neck" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.5"
+      upper="1.5"
+      effort="1.57"
+      velocity="390" />
+  </joint>
+  <link name="HEAD_chin">
+    <!-- edited with custom script -->
+    <inertial>
+    <origin
+        xyz="0.00292 -0.00883 -0.01141"
+        rpy="0 0 0" />
+    <mass value="0.06976" />
+    <inertia
+        ixx="4.2354910000000004e-05"
+        ixy="-1.650247e-05"
+        ixz="3.6080700000000003e-06"
+        iyy="6.330044e-05"
+        iyz="-3.7977e-07"
+        izz="6.109326e-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_chin.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="../meshes/HEAD_chin.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="HEAD2_tilt" type="revolute">
+    <origin
+      xyz="0 0.0186 0.12"
+      rpy="-1.5708 0 0" />
+    <parent link="HEAD_neck" />
+    <child link="HEAD_chin" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.0472"
+      upper="0.83776"
+      effort="1.57"
+      velocity="390" />
+  </joint>

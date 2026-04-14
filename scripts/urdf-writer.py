@@ -1,7 +1,7 @@
 import os
 import sys
 import contextlib
-from typing import List
+from typing import Dict, List
 from datetime import datetime
 
 # Get the directory where this script is located
@@ -77,8 +77,40 @@ def write_urdf(modules: List[str], name: str = "robot", template_path: str = Non
         print(f"Error processing template: {e}")
 
 
+def load_seed_config(seed_path: str) -> Dict[str, List[str]]:
+    """Load URDF generation targets from a YAML seed file."""
+    if not os.path.isfile(seed_path):
+        raise FileNotFoundError(f"Seed file '{seed_path}' not found.")
+
+    try:
+        import yaml  # type: ignore
+    except ImportError as exc:
+        raise ImportError(
+            "PyYAML is required to read seed config. Install with 'pip install pyyaml'."
+        ) from exc
+
+    with open(seed_path, "r", encoding="utf-8") as seed_file:
+        loaded = yaml.safe_load(seed_file)
+
+    if not isinstance(loaded, dict):
+        raise ValueError("Seed config must be a mapping of output-name -> module list.")
+
+    seed_config: Dict[str, List[str]] = {}
+    for output_name, modules in loaded.items():
+        if not isinstance(output_name, str) or not output_name.strip():
+            raise ValueError("Each seed key must be a non-empty output URDF name.")
+        if not isinstance(modules, list) or not all(isinstance(m, str) for m in modules):
+            raise ValueError(
+                f"Seed entry '{output_name}' must be a list of module names (strings)."
+            )
+        seed_config[output_name] = modules
+
+    return seed_config
+
+
 # Example usage
 if __name__ == "__main__":
+    seed_path = os.path.join(SCRIPT_DIR, "..", "urdf", "_seed.yaml")
     logs_dir = os.path.join(SCRIPT_DIR, "logs")
     os.makedirs(logs_dir, exist_ok=True)
     run_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -89,8 +121,8 @@ if __name__ == "__main__":
         tee_stderr = _Tee(sys.stderr, log_file)
         with contextlib.redirect_stdout(tee_stdout), contextlib.redirect_stderr(tee_stderr):
             print(f"[URDF-WRITER] Logging to '{log_path}'")
+            seed_config = load_seed_config(seed_path)
+            print(f"[URDF-WRITER] Loaded {len(seed_config)} targets from '{seed_path}'")
 
-            write_urdf(["_fixed-base", "head"], "head")
-            write_urdf(["_fixed-base", "head", "head-sensor_d455"], "head-d455")
-            write_urdf(["_fixed-base", "head", "head-sensor_mid360"], "head-mid360")
-            write_urdf(["_fixed-base", "head", "head-face", "head-sensor_d455", "head-sensor_mid360"], "head-full")
+            for output_name, module_list in seed_config.items():
+                write_urdf(module_list, output_name)

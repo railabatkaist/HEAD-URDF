@@ -1,4 +1,8 @@
 urdf/**
 scripts/logs/**
+**generated_**.urdf
+
+**/__pycache__
 
 !urdf/head-full.urdf
+!urdf/_seed-example.yaml

@@ -1,0 +1,8 @@
+# create a file named "_seed.yaml" in the "urdf" directory with the following content:
+
+head-full:
+- _fixed-base
+- head
+- head-sensor_d455
+- head-sensor_mid360
+- head-face

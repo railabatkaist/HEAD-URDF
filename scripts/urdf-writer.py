@@ -43,7 +43,7 @@ def write_urdf(modules: List[str], name: str = "robot", template_path: str = Non
             urdf_string = template_file.read()
 
         # Concatenate requested modules in order.
-        content = f"  <!-- [URDF-WRITER] Generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -->\n"
+        content = "  <!-- [URDF-WRITER] Generated from seed configuration -->\n"
 
         for module_name in modules:
             file_path = os.path.join(SCRIPT_DIR, "..", "modules", module_name)
